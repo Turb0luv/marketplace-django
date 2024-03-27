@@ -7,7 +7,6 @@ class LastActivityMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        # Обновляем время последнего действия пользователя
         if request.user.is_authenticated:
             try:
                 request.user.userprofile.last_action_time = datetime.now()
