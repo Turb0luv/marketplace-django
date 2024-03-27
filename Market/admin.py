@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Store, Product, Order, OrderItem, Currency
+from .models import Store, Product, Order, OrderItem, Currency, UserIPAddress, UserProfile
 
 
 class ProductInline(admin.TabularInline):
@@ -83,3 +83,22 @@ class OrderItemAdmin(admin.ModelAdmin):
 @admin.register(Currency)
 class CurrencyAdmin(admin.ModelAdmin):
     list_display = ['name']
+
+
+@admin.register(UserIPAddress)
+class UserIPAddressAdmin(admin.ModelAdmin):
+    list_display = [
+        'ip_address',
+        'user',
+        'last_login_time',
+    ]
+    list_filter = ['user', 'last_login_time']
+
+
+@admin.register(UserProfile)
+class UserIPAddressAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'last_action_time',
+    ]
+    list_filter = ['user', 'last_action_time']

@@ -48,9 +48,9 @@ class OrderItem(models.Model):
 class UserIPAddress(models.Model):
     ip_address = models.GenericIPAddressField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    last_login_time = models.DateTimeField()
+    last_login_time = models.DateTimeField(auto_now=True)
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    last_action_time = models.DateTimeField()
+    last_action_time = models.DateTimeField(auto_now=True)

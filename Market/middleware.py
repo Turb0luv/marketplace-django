@@ -8,12 +8,7 @@ class LastActivityMiddleware:
 
     def __call__(self, request):
         if request.user.is_authenticated:
-            try:
-                request.user.userprofile.last_action_time = datetime.now()
-                request.user.userprofile.save()
-            except UserProfile.DoesNotExist:
-                request.user.userprofile.get_or_create(user=request.user,
-                                                       last_action_time=datetime.now())
+            UserProfile.objects.get_or_create(user=request.user)
         response = self.get_response(request)
         return response
 
@@ -26,8 +21,8 @@ class UserIPMiddleware:
         # Сохраняем IP-адрес пользователя
         if request.user.is_authenticated:
             ip_address = request.META.get('REMOTE_ADDR')
-            UserIPAddress.objects.create(user=request.user,
-                                         ip_address=ip_address, )
+            UserIPAddress.objects.get_or_create(user=request.user,
+                                         ip_address=ip_address)
 
         response = self.get_response(request)
         return response
